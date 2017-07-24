@@ -6,7 +6,8 @@ from edc_dashboard.view_mixins import AppConfigViewMixin
 from edc_dashboard.views import ListboardView as BaseListboardView
 from edc_dashboard.view_mixins import ListboardFilterViewMixin
 
-from plot.view_mixins import PlotQuerysetViewMixin
+from plot_dashboard.view_mixins import PlotQuerysetViewMixin
+
 from survey import SurveyViewMixin, SurveyQuerysetViewMixin
 
 from ..models.household_structure import HouseholdStructure
