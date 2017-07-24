@@ -10,8 +10,10 @@ from plot_dashboard.view_mixins import PlotQuerysetViewMixin
 
 from survey import SurveyViewMixin, SurveyQuerysetViewMixin
 
-from ..models.household_structure import HouseholdStructure
-from ..view_mixins import HouseholdQuerysetViewMixin, HouseholdStructureWithLogEntryWrapper
+from household.models.household_structure import HouseholdStructure
+from household_dashboard.view_mixins import HouseholdQuerysetViewMixin
+from household.model_wrappers import (
+    HouseholdStructureWithLogEntryWrapper)
 from .listboard_filters import HouseholdListboardViewFilters
 
 
