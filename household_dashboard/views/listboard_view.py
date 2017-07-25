@@ -21,7 +21,7 @@ class ListboardView(SurveyViewMixin, EdcBaseViewMixin, AppConfigViewMixin,
                     ListboardFilterViewMixin, HouseholdQuerysetViewMixin,
                     PlotQuerysetViewMixin, SurveyQuerysetViewMixin, BaseListboardView):
 
-    app_config_name = 'household'
+    app_config_name = 'household_dashboard'
     navbar_item_selected = 'household'
     model = HouseholdStructure
     model_wrapper_class = HouseholdStructureWithLogEntryWrapper
