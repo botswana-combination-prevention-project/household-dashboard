@@ -10,7 +10,6 @@ from plot_dashboard.view_mixins import PlotQuerysetViewMixin
 
 from survey import SurveyViewMixin, SurveyQuerysetViewMixin
 
-from household.models.household_structure import HouseholdStructure
 from household_dashboard.view_mixins import HouseholdQuerysetViewMixin
 from household.model_wrappers import (
     HouseholdStructureWithLogEntryWrapper)
@@ -22,8 +21,8 @@ class ListboardView(SurveyViewMixin, EdcBaseViewMixin, AppConfigViewMixin,
                     PlotQuerysetViewMixin, SurveyQuerysetViewMixin, BaseListboardView):
 
     app_config_name = 'household_dashboard'
-    navbar_item_selected = 'household'
-    model = HouseholdStructure
+    navbar_item_selected = 'household_dashboard'
+    model = 'household.householdstructure'
     model_wrapper_class = HouseholdStructureWithLogEntryWrapper
     listboard_view_filters = HouseholdListboardViewFilters()
 
