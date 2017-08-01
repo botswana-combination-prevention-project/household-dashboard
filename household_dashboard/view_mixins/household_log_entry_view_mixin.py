@@ -2,7 +2,8 @@ from edc_base.utils import get_utcnow
 
 from household.model_wrappers import HouseholdLogEntryModelWrapper
 from household.exceptions import HouseholdLogRequired
-from household.models import HouseholdLogEntry, todays_log_entry_or_raise
+from household.models import HouseholdLogEntry
+from household.utils import todays_log_entry_or_raise
 
 
 class HouseholdLogEntryViewMixin:
