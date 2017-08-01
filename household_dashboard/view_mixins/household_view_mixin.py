@@ -4,7 +4,7 @@ from household.model_wrappers import HouseholdModelWrapper
 
 class HouseholdViewMixin:
 
-    household_model_wrapper_class = HouseholdModelWrapper
+    household_model_wrapper_cls = HouseholdModelWrapper
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -20,7 +20,7 @@ class HouseholdViewMixin:
         if self.household_identifier:
             self.household = Household.objects.get(
                 household_identifier=self.household_identifier)
-            self.household_wrapped = self.household_model_wrapper_class(
+            self.household_wrapped = self.household_model_wrapper_cls(
                 self.household)
         context.update(household=self.household_wrapped)
         return context

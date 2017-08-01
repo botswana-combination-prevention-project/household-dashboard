@@ -23,7 +23,7 @@ class ListboardView(SurveyViewMixin, EdcBaseViewMixin, AppConfigViewMixin,
     app_config_name = 'household_dashboard'
     navbar_item_selected = 'household_dashboard'
     model = 'household.householdstructure'
-    model_wrapper_class = HouseholdStructureWithLogEntryWrapper
+    model_wrapper_cls = HouseholdStructureWithLogEntryWrapper
     listboard_view_filters = HouseholdListboardViewFilters()
 
     plot_queryset_lookups = ['household', 'plot']
