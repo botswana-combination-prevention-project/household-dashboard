@@ -8,7 +8,7 @@ from household.utils import todays_log_entry_or_raise
 
 class HouseholdLogEntryViewMixin:
 
-    household_log_entry_model_wrapper_class = HouseholdLogEntryModelWrapper
+    household_log_entry_model_wrapper_cls = HouseholdLogEntryModelWrapper
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -35,7 +35,7 @@ class HouseholdLogEntryViewMixin:
         """Returns a model wrapper instance.
         """
         return (
-            self.household_log_entry_model_wrapper_class(
+            self.household_log_entry_model_wrapper_cls(
                 self.current_household_log_entry
                 or HouseholdLogEntry(
                     household_log=self.household_log))
@@ -74,5 +74,5 @@ class HouseholdLogEntryViewMixin:
         wrapped_objects = []
         for obj in self.household_log_entries:
             wrapped_objects.append(
-                self.household_log_entry_model_wrapper_class(obj))
+                self.household_log_entry_model_wrapper_cls(obj))
         return wrapped_objects

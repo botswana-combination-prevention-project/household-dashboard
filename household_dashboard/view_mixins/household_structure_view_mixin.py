@@ -8,7 +8,7 @@ from household.model_wrappers import HouseholdStructureModelWrapper
 
 class HouseholdStructureViewMixin:
 
-    household_structure_model_wrapper_class = HouseholdStructureModelWrapper
+    household_structure_model_wrapper_cls = HouseholdStructureModelWrapper
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -49,7 +49,7 @@ class HouseholdStructureViewMixin:
     def household_structure_wrapped(self):
         """Returns a wrapped household structure.
         """
-        return self.household_structure_model_wrapper_class(
+        return self.household_structure_model_wrapper_cls(
             self.household_structure)
 
     @property
