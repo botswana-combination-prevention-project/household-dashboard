@@ -1,13 +1,14 @@
+from django.apps import apps as django_apps
 from edc_base.utils import get_utcnow
-
-from household.model_wrappers import HouseholdLogEntryModelWrapper
 from household.exceptions import HouseholdLogRequired
-from household.models import HouseholdLogEntry
 from household.utils import todays_log_entry_or_raise
+
+from ..model_wrappers import HouseholdLogEntryModelWrapper
 
 
 class HouseholdLogEntryViewMixin:
 
+    household_log_entry_model = 'household.householdlogentry'
     household_log_entry_model_wrapper_cls = HouseholdLogEntryModelWrapper
 
     def __init__(self, **kwargs):
@@ -31,13 +32,17 @@ class HouseholdLogEntryViewMixin:
         return None
 
     @property
+    def household_log_entry_model_cls(self):
+        return django_apps.get_model(self.household_log_entry_model)
+
+    @property
     def current_household_log_entry_wrapped(self):
         """Returns a model wrapper instance.
         """
         return (
             self.household_log_entry_model_wrapper_cls(
                 self.current_household_log_entry
-                or HouseholdLogEntry(
+                or self.household_log_entry_model_cls(
                     household_log=self.household_log))
         )
 
@@ -65,7 +70,7 @@ class HouseholdLogEntryViewMixin:
         except AttributeError as e:
             if 'householdlog' not in str(e) and 'householdlogentry_set' not in str(e):
                 raise
-            return HouseholdLogEntry.objects.none()
+            return self.household_log_entry_model_cls.objects.none()
 
     @property
     def household_log_entries_wrapped(self):

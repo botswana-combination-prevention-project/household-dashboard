@@ -1,13 +1,13 @@
 from django.apps import apps as django_apps
-
+from django.core.exceptions import ObjectDoesNotExist
 from edc_map.site_mappers import site_mappers
 
-from household.models import HouseholdStructure
-from household.model_wrappers import HouseholdStructureModelWrapper
+from ..model_wrappers import HouseholdStructureModelWrapper
 
 
 class HouseholdStructureViewMixin:
 
+    household_structure_model = 'household.householdstructure'
     household_structure_model_wrapper_cls = HouseholdStructureModelWrapper
 
     def __init__(self, **kwargs):
@@ -28,6 +28,10 @@ class HouseholdStructureViewMixin:
         return context
 
     @property
+    def household_structure_model_cls(self):
+        return django_apps.get_model(self.household_structure_model)
+
+    @property
     def household_structure(self):
         """Returns a household structure model instance or None.
         """
@@ -38,10 +42,10 @@ class HouseholdStructureViewMixin:
                 survey_schedule = self.survey_schedule_object.field_value.replace(
                     site_mappers.current_map_area, '')
             try:
-                self._household_structure = HouseholdStructure.objects.get(
+                self._household_structure = self.household_structure_model_cls.objects.get(
                     household=self.household,
                     survey_schedule__icontains=survey_schedule)
-            except HouseholdStructure.DoesNotExist:
+            except ObjectDoesNotExist:
                 self._household_structure = None
         return self._household_structure
 
@@ -56,5 +60,5 @@ class HouseholdStructureViewMixin:
     def household_structures(self):
         """Returns a Queryset.
         """
-        return HouseholdStructure.objects.filter(
+        return self.household_structure_model_cls.objects.filter(
             household=self.household).order_by('survey_schedule')
