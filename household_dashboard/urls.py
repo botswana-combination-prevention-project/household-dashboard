@@ -1,11 +1,9 @@
 from django.conf.urls import url
-
 from edc_constants.constants import UUID_PATTERN
-
-from household.patterns import household_identifier
-from plot.patterns import plot_identifier
+from plot_dashboard.patterns import plot_identifier
 from survey.patterns import survey_schedule
 
+from .patterns import household_identifier
 from .views import ListboardView
 
 app_name = 'household_dashboard'
