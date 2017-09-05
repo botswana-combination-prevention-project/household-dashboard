@@ -33,6 +33,7 @@ class HouseholdLogModelRelation(ModelRelation):
 class HouseholdStructureWithLogEntryWrapper(ModelWithLogWrapper):
 
     model = 'household.householdstructure'
+    log_model_name = 'household_log'
     model_wrapper_cls = HouseholdStructureModelWrapper
     log_entry_model_wrapper_cls = HouseholdLogEntryModelWrapper
     model_relation_cls = HouseholdLogModelRelation
