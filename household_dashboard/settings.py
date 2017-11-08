@@ -140,6 +140,7 @@ DEVICE_ID = '99'
 DEVICE_ROLE = CENTRAL_SERVER
 SURVEY_GROUP_NAME = 'test_survey'
 SURVEY_SCHEDULE_NAME = 'year-1'
+MAIN_NAVBAR_NAME = 'bcpp'
 
 
 if 'test' in sys.argv:
